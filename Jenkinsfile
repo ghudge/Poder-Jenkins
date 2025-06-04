@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        CYPRESS_CACHE_FOLDER = "${WORKSPACE}/.cache/Cypress"
+        CYPRESS_CACHE_FOLDER = "${WORKSPACE}\\.cache\\Cypress"
     }
 
     tools {
-        nodejs 'NodeJS 18.20.8'
+        nodejs 'NodeJS 18.20.8'  // Make sure this name matches Jenkins config exactly
     }
     
     stages {
@@ -18,19 +18,21 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                bat 'npm ci'
             }
         }
 
         stage('Run Cypress Tests (Feature Files - Headless)') {
             steps {
-                sh 'npx cypress run --browser chrome --spec'
+                // Specify your spec file(s) after --spec or remove it to run all
+                bat 'npx cypress run --browser chrome --spec "cypress/e2e/**/*.feature"'
             }
         }
+
         stage('Test Node') {
             steps {
-                sh 'node -v'
-                sh 'npm -v'
+                bat 'node -v'
+                bat 'npm -v'
             }
         }
     }
@@ -41,4 +43,3 @@ pipeline {
         }
     }
 }
-
