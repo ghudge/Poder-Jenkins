@@ -1,11 +1,38 @@
 pipeline {
     agent any
 
+    environment {
+        CYPRESS_CACHE_FOLDER = "${WORKSPACE}/.cache/Cypress"
+    }
+
+    tools {
+        nodejs 'NodeJS 18'
+    }
+
     stages {
-        stage('Test') {
+        stage('Checkout') {
             steps {
-                echo 'Test Webapp'
+                git credentialsId: 'github-creds', url: 'https://github.com/ghudge/Poder-Jenkins.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm ci'
+            }
+        }
+
+        stage('Run Cypress Tests (Feature Files - Headless)') {
+            steps {
+                sh 'npx cypress run --browser chrome --spec cypress\e2e\Features\P3_01_loginPoderValidAndInvalid.feature'
             }
         }
     }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'cypress/videos/**/*.*,cypress/screenshots/**/*.*', allowEmptyArchive: true
+        }
+    }
 }
+
