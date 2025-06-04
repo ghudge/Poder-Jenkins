@@ -8,15 +8,7 @@ pipeline {
     tools {
         nodejs 'NodeJS 18'
     }
-    stages {
-        stage('Test Node') {
-            steps {
-                sh 'node -v'
-                sh 'npm -v'
-            }
-        }
-    }
-
+    
     stages {
         stage('Checkout') {
             steps {
@@ -33,6 +25,12 @@ pipeline {
         stage('Run Cypress Tests (Feature Files - Headless)') {
             steps {
                 sh 'npx cypress run --browser chrome --spec'
+            }
+        }
+        stage('Test Node') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
             }
         }
     }
