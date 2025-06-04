@@ -24,7 +24,7 @@ pipeline {
 
         stage('Run Cypress Tests (Feature Files - Headless)') {
             steps {
-                sh 'npx cypress run --browser chrome --spec cypress\e2e\Features\P3_01_loginPoderValidAndInvalid.feature'
+                sh 'npx cypress run --browser chrome --spec'
             }
         }
     }
