@@ -24,23 +24,16 @@ pipeline {
             }
         }
 
-        stage('Verify Cypress Install') {
-            steps {
-                bat 'npx cypress verify'
-            }
-        }
-
         stage('Run Cypress Tests (Feature Files - Headless)') {
             steps {
                 // Run Cypress in headless Chrome
                 bat 'npx cypress run --spec "cypress/e2e/Features/P3_01_loginPoderValidAndInvalid.feature" --browser chrome'
             }
         }
-
-        stage('Check Node & NPM Versions') {
+        stage('Generate Report') {
             steps {
-                bat 'node -v'
-                bat 'npm -v'
+                // Run Cypress in headless Chrome
+                bat 'node cucumber-html-report.js'
             }
         }
     }
