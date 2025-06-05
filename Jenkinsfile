@@ -14,7 +14,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone from GitHub using credentials
-                git credentialsId: 'github-creds', url: 'https://github.com/ghudge/Poder-Jenkins.git'
+                 git branch: 'main', url: 'https://github.com/ghudge/Poder-Jenkins.git'
             }
         }
 
