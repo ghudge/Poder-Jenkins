@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:cucumber": "npx cypress run ./cypress/e2e/Features/P3_01_loginPoderValidAndInvalid.feature",
     "run-test": "npx cypress run --browser chrome --spec cypress/e2e/Features/*.feature",
     "run-specific2": "npx cypress run --spec cypress/e2e/Features/seguridadUsuariosModule.feature --env TAGS='@testcase12' --browser chrome --headed",
     "run-specific1": "npx cypress run --spec cypress/e2e/Features/loginPoderValidAndInvalid.feature --env TAGS='@testcase3' --browser chrome --headed",
