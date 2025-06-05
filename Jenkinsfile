@@ -1,45 +1,55 @@
-// pipeline {
-//     agent any
+pipeline {
+    agent any
 
-//     environment {
-//         CYPRESS_CACHE_FOLDER = "${WORKSPACE}\\.cache\\Cypress"
-//     }
+    environment {
+        // Use double backslashes on Windows
+        CYPRESS_CACHE_FOLDER = "${WORKSPACE}\\.cache\\Cypress"
+    }
 
-//     tools {
-//         nodejs 'NodeJS 18.20.8'  // Make sure this name matches Jenkins config exactly
-//     }
-    
-//     stages {
-//         stage('Checkout') {
-//             steps {
-//                 git credentialsId: 'github-creds', url: 'https://github.com/ghudge/Poder-Jenkins.git'
-//             }
-//         }
+    tools {
+        nodejs 'NodeJS 18.20.8'  // Must match the name configured in Jenkins → Global Tool Configuration
+    }
 
-//         stage('Install Dependencies') {
-//             steps {
-//                 bat 'npm ci'
-//             }
-//         }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Clone from GitHub using credentials
+                git credentialsId: 'github-creds', url: 'https://github.com/ghudge/Poder-Jenkins.git'
+            }
+        }
 
-//         stage('Run Cypress Tests (Feature Files - Headless)') {
-//             steps {
-//                 // Specify your spec file(s) after --spec or remove it to run all
-//                 bat 'npx cypress run --browser chrome --spec "cypress/e2e/**/*.feature"'
-//             }
-//         }
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm ci'
+            }
+        }
 
-//         stage('Test Node') {
-//             steps {
-//                 bat 'node -v'
-//                 bat 'npm -v'
-//             }
-//         }
-//     }
+        stage('Verify Cypress Install') {
+            steps {
+                bat 'npx cypress verify'
+            }
+        }
 
-//     post {
-//         always {
-//             archiveArtifacts artifacts: 'cypress/videos/**/*.*,cypress/screenshots/**/*.*', allowEmptyArchive: true
-//         }
-//     }
-// }
+        stage('Run Cypress Tests (Feature Files - Headless)') {
+            steps {
+                // Run Cypress in headless Chrome
+                bat 'npx cypress run --spec ".\cypress\e2e\Features\P3_01_loginPoderValidAndInvalid.feature" --browser chrome'
+            }
+        }
+
+        stage('Check Node & NPM Versions') {
+            steps {
+                bat 'node -v'
+                bat 'npm -v'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Archive test results: videos and screenshots
+            archiveArtifacts artifacts: 'cypress/videos/**/*.*,cypress/screenshots/**/*.*', allowEmptyArchive: true
+        }
+    }
+}
+
