@@ -33,7 +33,7 @@ pipeline {
         stage('Run Cypress Tests (Feature Files - Headless)') {
             steps {
                 // Run Cypress in headless Chrome
-                bat 'npx cypress run --spec ".\cypress\e2e\Features\P3_01_loginPoderValidAndInvalid.feature" --browser chrome'
+                bat 'npx cypress run --spec "cypress/e2e/Features/P3_01_loginPoderValidAndInvalid.feature" --browser chrome'
             }
         }
 
