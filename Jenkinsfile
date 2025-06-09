@@ -57,7 +57,7 @@ pipeline {
             ])
 
             // Archive the ZIP file so it can be downloaded
-            archiveArtifacts artifacts: 'cypress/cucumber-json/html-report.zip', fingerprint: true
+            archiveArtifacts artifacts: 'cypress/cucumber-json/html-report.zip'
         }
     }
 }
