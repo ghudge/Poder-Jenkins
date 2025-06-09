@@ -1,7 +1,7 @@
 Feature: Go to Services V2 module and Update documents
 
   Background: As a user/Admin I login poder website
-    Given I am logged in to the poder website with email and password
+    Given I am logged in to the poder website with email and password ssv2
 
  @ssv2_cargar_documento @regression
   Scenario Outline: I goto Services v2 module and add documents for Demandante

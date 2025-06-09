@@ -1,11 +1,11 @@
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 import seguridadRegistrosDAPage from "../pom/seguridadRegistrosDAPage";
 
-Given(/^I am logged in to the poder website with email and password$/, () => {
+Given(/^I am logged in to the poder website with email and password registro$/, () => {
     // cy.fixture("loginData").then((data) => {
     //     cy.loginWebsite(data.email, data.password)
     // })
-    cy.loginWebsite('nshah@poderjudicial.gob.do','AYtq&RhK3A,42001')
+    cy.loginWebsite('nshah@poderjudicial.gob.do','AYtq&RhK3A,420011')
 });
 
 Then(/^I am on home page of poder website registro$/, () => {

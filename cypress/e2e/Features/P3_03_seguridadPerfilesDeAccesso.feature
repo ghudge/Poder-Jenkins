@@ -1,7 +1,7 @@
 Feature: Seguridad Module Perfiles De Accesso card
 
   Background: As a user/Admin I login poder website
-    Given I am logged in to the poder website with email and password
+    Given I am logged in to the poder website with email and password perfilaccess
     Then I am on home page of poder website of sperfildeacces module
 
   @add_new_profile_in_perfils_de_accesso @regression

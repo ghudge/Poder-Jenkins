@@ -1,7 +1,7 @@
 Feature: Seguridad Module Perfiles De Accesso card
 
   Background: As a user/Admin I login poder website
-    Given I am logged in to the poder website with email and password
+    Given I am logged in to the poder website with email and password registro
     Then I am on home page of poder website registro
     When I click on module Seguridad registro
     Then I validate all five card registro

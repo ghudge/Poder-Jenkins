@@ -3,12 +3,12 @@ import seguridadPerfilesDAPage from "../pom/seguridadPerfilesDAPage";
 
 var Profile = ''
 
-// Given(/^I am logged in to the poder website with email and password$/, () => {
-//     // cy.fixture("loginData").then((data) => {
-//     //     cy.loginWebsite(data.email, data.password)
-//     // })
-// 	cy.loginWebsite('nshah@poderjudicial.gob.do','AYtq&RhK3A,42001')
-// });
+Given(/^I am logged in to the poder website with email and password perfilaccess$/, () => {
+    // cy.fixture("loginData").then((data) => {
+    //     cy.loginWebsite(data.email, data.password)
+    // })
+	cy.loginWebsite('nshah@poderjudicial.gob.do','AYtq&RhK3A,420011')
+});
 
 Then(/^I am on home page of poder website of sperfildeacces module$/, () => {
     seguridadPerfilesDAPage.titlePage()
