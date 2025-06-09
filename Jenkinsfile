@@ -40,7 +40,7 @@ pipeline {
             steps {
                 // Use PowerShell to zip the report folder
                 bat '''
-                    powershell -Command "Compress-Archive -Path target\\site\\html-report -DestinationPath target\\site\\html-report.zip"
+                    powershell -Command "Compress-Archive -Path cypress/cucumber-json -DestinationPath target\\site\\html-report.zip"
                 '''
             }
         }
@@ -50,7 +50,7 @@ pipeline {
         always {
             // Publish the HTML report in Jenkins UI
             publishHTML([
-                reportDir: 'target/site/html-report',
+                reportDir: 'cypress/cucumber-json',
                 reportFiles: 'index.html',
                 reportName: 'Test Report',
                 allowMissing: false,
