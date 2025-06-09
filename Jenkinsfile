@@ -40,7 +40,7 @@ pipeline {
             steps {
                 // Use PowerShell to zip the report folder
                 bat '''
-                    powershell -Command "Compress-Archive -Path cypress/cucumber-json -DestinationPath target\\site\\html-report.zip"
+                    powershell -Command "Compress-Archive -Path cypress/cucumber-json -DestinationPath cypress/cucumber-json/html-report.zip"
                 '''
             }
         }
@@ -59,7 +59,7 @@ pipeline {
             ])
 
             // Archive the ZIP file so it can be downloaded
-            archiveArtifacts artifacts: 'target/site/html-report.zip', fingerprint: true
+            archiveArtifacts artifacts: 'cypress/cucumber-json/html-report.zip', fingerprint: true
         }
     }
 }
