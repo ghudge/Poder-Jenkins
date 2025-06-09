@@ -36,10 +36,30 @@ pipeline {
                 bat 'node cucumber-html-report.js'
             }
         }
-        stage('Report') {
+        stage('Zip Report') {
             steps {
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'cypress/cucumber-json', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                // Use PowerShell to zip the report folder
+                bat '''
+                    powershell -Command "Compress-Archive -Path target\\site\\html-report -DestinationPath target\\site\\html-report.zip"
+                '''
             }
+        }
+    }
+
+    post {
+        always {
+            // Publish the HTML report in Jenkins UI
+            publishHTML([
+                reportDir: 'target/site/html-report',
+                reportFiles: 'index.html',
+                reportName: 'Test Report',
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true
+            ])
+
+            // Archive the ZIP file so it can be downloaded
+            archiveArtifacts artifacts: 'target/site/html-report.zip', fingerprint: true
         }
     }
 }
