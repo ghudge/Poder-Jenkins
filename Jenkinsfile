@@ -39,9 +39,7 @@ pipeline {
         stage('Zip Report') {
             steps {
                 // Use PowerShell to zip the report folder
-                bat '''
-                    powershell -Command "Compress-Archive -Path cypress/cucumber-json -DestinationPath cypress/cucumber-json/html-report.zip"
-                '''
+                bat 'powershell -Command "Compress-Archive -Path cypress/cucumber-json -DestinationPath cypress/cucumber-json/html-report.zip -Force"'
             }
         }
     }
